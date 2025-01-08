@@ -1,0 +1,40 @@
+:root{
+  --primary-color:#14a44d;
+  --secondary-color:#a41422;
+  --blue-color:#9514a4;
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.css-1lvtzne {
+  -webkit-box-flex: 0 !important;
+  -webkit-flex-grow: 0 !important;
+  flex-grow: 0 !important;
+}
+.css-ptdwpq-MuiPaper-root-MuiAppBar-root {
+  --AppBar-background: var(--primary-color) !important;
+}
+.css-1u9o2lj-MuiToolbar-root{
+  justify-content: space-between !important;
+}
+
+@media(min-width:768px){
+  .css-hhdjsd-MuiContainer-root {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
+}
+@media(min-width:992px){
+  .css-hhdjsd-MuiContainer-root {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+}
+}
+
+.form-control:focus {
+  border-color: var(--primary-color) !important;
+  outline: 0;
+  box-shadow: none !important;
+}
