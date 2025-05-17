@@ -74,7 +74,7 @@ function PlayerSearch() {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container pt-5 mt-5">
       <h1 className="text-center mb-4">Player Search</h1>
       <div className="d-flex justify-content-center flex-wrap">
         <div className="mb-3 col-12 col-md-8 col-lg-6 position-relative">

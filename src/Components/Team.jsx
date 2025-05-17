@@ -71,7 +71,7 @@ const CricketApp = () => {
 
   return (
     <div className="container">
-      <h1 className="mt-5 text-center">Cricket Teams and Players</h1>
+      <h1 className="mt-5 pt-5 text-center">Cricket Teams and Players</h1>
 
       {/* Team Search */}
       <div className="d-flex justify-content-center">

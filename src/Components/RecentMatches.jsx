@@ -62,7 +62,7 @@ const GetMatches = () => {
 
   return (
     <>   
-      <div className="container py-3">
+      <div className="container mt-5 py-3">
       <h1 className="text-capitalize fw-bold pt-3 text-center">Recent matches</h1>
 
 {/* Filter Buttons */}

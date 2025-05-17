@@ -27,7 +27,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 pt-5">
       <h1 className="text-center mb-4">Latest Cricket News</h1>
       <div className="row">
         {news.length > 0 ? (

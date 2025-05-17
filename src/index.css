@@ -8,14 +8,24 @@
   padding: 0;
 }
 
+.css-hhdjsd-MuiContainer-root {
+  /* z-index: 5 !important; */
+  width: 100%;
+  margin-left: auto;
+  box-sizing: border-box;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  /* position: fixed !important; */
+ 
+}
+
 .css-1lvtzne {
   -webkit-box-flex: 0 !important;
   -webkit-flex-grow: 0 !important;
   flex-grow: 0 !important;
 }
-.css-ptdwpq-MuiPaper-root-MuiAppBar-root {
-  --AppBar-background: var(--primary-color) !important;
-}
+
 .css-1u9o2lj-MuiToolbar-root{
   justify-content: space-between !important;
 }

@@ -65,7 +65,7 @@ const GetMatches = () => {
 
   return (
     <>   
-      <div className="container py-3">
+      <div className="container mt-5 py-3">
       <h1 className="text-capitalize fw-bold pt-3 text-center">Live matches</h1>
 
 {/* Filter Buttons */}
@@ -106,7 +106,7 @@ const GetMatches = () => {
           </p>
           </div>
          <div className="mt-5 d-flex justify-content-center">
-         <p className="text-center text-white bg-danger col-12">
+         <p className="text-center text-white bg-danger mt-3 px-3 px-xl-0 col-12">
             <strong>{matchInfo?.team1?.teamName || "Team 1"}</strong> vs{" "}
             <strong>{matchInfo?.team2?.teamName || "Team 2"}</strong>
           </p>

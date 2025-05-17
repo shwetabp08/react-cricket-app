@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -32,6 +32,8 @@ function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorElMatches, setAnchorElMatches] = React.useState(null);
 
+  const location = useLocation();
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -56,9 +58,11 @@ function ResponsiveAppBar() {
     setAnchorElMatches(null);
   };
 
+  const isActive = (path) => location.pathname === path;
+
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
+    <AppBar position="fixed" sx={{ backgroundColor: '#14a44d',zIndex:'5' }}>
+      <Container maxWidth="xl" sx={{ backgroundColor: '#14a44d' }}>
         <Toolbar disableGutters>
           <SportsCricketIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Link className="text-decoration-none text-white" to="/">
@@ -78,97 +82,125 @@ function ResponsiveAppBar() {
                 className="bg-danger border border-2 border-white rounded-circle me-1"
                 style={{ padding: '0 6px' }}
               >
-                SP{' '}
+                SP
               </span>{' '}
               CricBuzz
             </Typography>
           </Link>
+
+          {/* Mobile menu */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
+            <IconButton size="large" onClick={handleOpenNavMenu} color="inherit">
               <MenuIcon />
             </IconButton>
             <Menu
-              id="menu-appbar"
               anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               {pages.map((page) => (
                 <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                  <Link to={page.path} style={{ textDecoration: 'none', color: 'inherit',fontWeight:'bold' }}>
-                    <Typography textAlign="center">{page.name}</Typography>
+                  <Link to={page.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <Typography
+  sx={{
+    fontWeight: 'bold',
+    textDecoration: isActive(page.path) ? 'underline' : 'none',
+    textDecorationColor: isActive(page.path) ? '#a41422' : 'inherit',
+    textDecorationThickness: isActive(page.path) ? '3px' : 'auto',
+    textUnderlineOffset: isActive(page.path) ? '7px' : 'auto',
+  }}
+>
+  {page.name}
+</Typography>
                   </Link>
                 </MenuItem>
               ))}
               <MenuItem onClick={handleOpenMatchesMenu}>
-                <Typography textAlign="center">Matches</Typography>
-              </MenuItem>
+    <Typography
+      sx={{
+        fontWeight: 'bold',
+        textAlign: 'center',
+      }}
+    >
+      Matches
+    </Typography>
+  </MenuItem>
             </Menu>
           </Box>
+
           <SportsCricketIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Link className="text-decoration-none text-white" to="/">
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            <span
+            <Typography
+              variant="h5"
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: 'flex', md: 'none' },
+                flexGrow: 1,
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              <span
                 className="bg-danger border border-2 border-white rounded-circle me-1"
                 style={{ padding: '0 6px' }}
               >
-                SP{' '}
+                SP
               </span>{' '}
               CricBuzz
-          </Typography>
+            </Typography>
           </Link>
+
+          {/* Desktop menu */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>
             {pages.map((page) => (
               <Link
                 key={page.name}
                 to={page.path}
-                style={{ textDecoration: 'none', color: 'white' }}
+                style={{ textDecoration: 'none' }}
               >
                 <Button
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  sx={{
+                    my: 2,
+                    color: 'white',
+                    display: 'block',
+                    textDecoration: isActive(page.path) ? '3px underline solid #a41422' : 'none',
+                    textUnderlineOffset:'7px',
+                    borderRadius: 0,
+                    '&:hover': {
+      textDecoration: isActive(page.path) ? '3px underline solid #a41422' : 'none',
+    },
+                  }}
                 >
                   {page.name}
                 </Button>
               </Link>
             ))}
             <Button
-              onClick={handleOpenMatchesMenu}
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              Matches
-            </Button>
+  onClick={handleOpenMatchesMenu}
+  sx={{
+    my: 2,
+    color: 'white',
+    display: 'block',
+    textDecoration: matches.some((match) => isActive(match.path))
+      ? '3px underline #a41422'
+      : 'none',
+    textUnderlineOffset: '7px',
+    borderRadius: 0,
+    '&:hover': {
+      textDecoration: matches.some((match) => isActive(match.path))
+        ? '3px underline #a41422'
+        : 'none',
+      backgroundColor: 'transparent', // Optional: Prevent background change on hover
+    },
+  }}
+>
+  Matches
+</Button>
             <Menu
               id="menu-matches"
               anchorEl={anchorElMatches}
@@ -176,7 +208,6 @@ function ResponsiveAppBar() {
                 vertical: 'bottom',
                 horizontal: 'left',
               }}
-              keepMounted
               transformOrigin={{
                 vertical: 'top',
                 horizontal: 'left',
@@ -187,12 +218,21 @@ function ResponsiveAppBar() {
               {matches.map((match) => (
                 <MenuItem key={match.name} onClick={handleCloseMatchesMenu}>
                   <Link to={match.path} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <Typography textAlign="center">{match.name}</Typography>
+                    <Typography
+                      sx={{
+                        fontWeight: 'bold',
+                        borderBottom: isActive(match.path) ? '3px solid #a41422' : 'none',
+                      }}
+                    >
+                      {match.name}
+                    </Typography>
                   </Link>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
+
+          {/* User Avatar */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -201,17 +241,7 @@ function ResponsiveAppBar() {
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
-              id="menu-appbar"
               anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
